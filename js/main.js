@@ -1,4 +1,6 @@
 import UsersComponent from "./components/UsersComponents.js";
+import signUp from "./components/signUp.js";
+
 
 Vue.component('player', {
 props: ['movie'],
@@ -17,7 +19,8 @@ template: `
 
 const router = new VueRouter({
   routes: [
-    {path: "/", name: "home", component: UsersComponent}
+    {path: "/", name: "home", component: UsersComponent},
+    {path: "/signUp", name: "sign-up", component: signUp}
   ]
 
 })
