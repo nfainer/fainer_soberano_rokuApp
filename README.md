@@ -12,6 +12,8 @@
 * Developer - Noah Fainer
 * Designer - Natalie Soberano
 
+
+
 ## Project Objective
 * Create a audio/video application that allows a user to be able to log in, filter and select content based on a user's profile and their settings
 * Parent vs Kids
