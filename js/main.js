@@ -19,7 +19,7 @@ template: `
 
 const router = new VueRouter({
   routes: [
-    {path: "/", name: "home", component: UsersComponent},
+    {path: "/", name: "home", component: UsersComponents},
     {path: "/signUp", name: "sign-up", component: signUp}
   ]
 

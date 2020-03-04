@@ -4,6 +4,9 @@ export default {
     <div class="container">
         <h1>Sign Up For Flashback</h1>
 
+        <div class="bg">
+        <img src="images/bckgrd_img.png" alt="">
+        </div>
 
 
         <form action="includes/signUp.php" method="post">

@@ -11,16 +11,28 @@ a {
     img { width: 180px; border: thin solid rgba(255, 255, 255, 0.8); }
 }
 
+#logo{
+
+    img {
+        width: 20%;
+    }
+
+    padding-left: 20px;
+}
+
 body {
     display: flex;
     flex-direction: column;
 
-    background-color: black;
-    background: url(../images/papyrus.png) repeat;
+    background-color: #1d1e1d;
     color: #333;
 
     font-size: 16px;
     font-family: arial, helvetica, sans-serif;
+}
+
+.main-nav{
+    display: flex;
 }
 
 main { flex: 1 0 auto; }
