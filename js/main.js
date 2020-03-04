@@ -1,112 +1,72 @@
-import UsersComponent from "./components/UsersComponents.js";
+// import the login component first (actually all components here, but we're starting with login)
+import LoginComponent from "./components/LoginComponent.js";
+import UsersComponent from "./components/UsersComponent.js";
 
-Vue.component('player', {
-props: ['movie'],
+(() => {
+  let router = new VueRouter({
+    // set routes
+    routes: [
+      { path: '/', redirect: { name: "login" } },
+      { path: '/login', name: "login", component: LoginComponent },
+      { path: '/users', name: "users", component: UsersComponent }
+    ]
+  });
 
-template: `
-      <div>
-      <h3 class="movie-title">{{ movie.videotitle }}</h3>
-      <video :src="'video/' + movie.vidsource" controls autoplay></video>
-      <div class="movie-details">
-        <p>{{ movie.videodescription}}</p>
-      </div>
-      </div>
-`
+  const vm = new Vue({
 
-})
+    data: {
+      authenticated: false,
+      administrator: false,
 
-const router = new VueRouter({
-  routes: [
-    {path: "/", name: "home", component: UsersComponent}
-  ]
+      mockAccount: {
+        username: "user",
+        password: "password"
+      },
 
-})
+      user: [],
 
-
-var vm = new Vue({
-  el: "#app",
-
-  router,
-
-  data: {
-
-
-    // mock up the user - this well eventually come from the database UMS (user management system)
-    user: {
-       isLoggedIn: true,
-       settings: {}
+      //currentUser: {},
     },
 
-    // this data would also come from the database, but we'll just mock it up for now
-    videodata: [
-      { name: "Star Wars The Force Awakens", thumb: "forceawakens.jpg", vidsource: "forceawakens.mp4", description: "yet another star wars movie" },
-      { name: "Stranger Things", thumb: "strangerthings.jpg", vidsource: "strangerthings.mp4", description: "don't get lost in the upside down" },
-      { name: "Marvel's The Avengers", thumb: "avengers.jpg", vidsource: "avengers.mp4", description: "will they make black widow action figures this time?" }
-    ],
+    created: function () {
+      // do a localstorage session check and set authenticated to true if the session still exists
+      // if the cached user exists, then just navigate to their user home page
 
-    movie: {
-    videotitle: 'goes here',
-    vidsource:  "",
-    videodescription: "vid desc here",
-
-
+      // the localstorage session will persist until logout
     },
 
+    methods: {
+      setAuthenticated(status, data) {
+        this.authenticated = status;
+        // handle implicit type coercion (bad, bad part of JS)
+        // turn our admin 1 or 0 back into a number
+        this.administrator = parseInt(data.isadmin);
+        this.user = data;
+      },
 
-    showDetails: false,
+      logout() {
+        // delete local session
 
-  },
-
-  created: function() {
-    // run a fetch call and get the user data
-    console.log('created lifecycle hook fired here, go get user data');
-    // this.getUserData();
-  },
-
-  methods: {
-
-    getUserData() {
-      // do a fetch call here and get the user from the DB
-      const url = './includes/index.php?getUser=1';
-
-      fetch(url) // get the data from the DB
-      .then(res => res.json()) // translate JSON to plain object
-      .then(data => { // use the plain object (the user)
-        console.log(data); // log it to console (testing)
-
-        // put our DB data into vue
-        this.user.settings = data[0];
-      })
-      .catch((error) => console.error(error))
+        // push user back to login page
+        this.$router.push({ path: "/login" });
+        this.authenticated = false;
+        this.administrator = false;
+      }
     },
 
-    setUserPrefs() {
-      // this is the preferences control, hit the api when ready (or use a component)
-      console.log('set user prefs here');
-    },
+    router: router
+  }).$mount("#app");
 
-    userLogIn() {
-      // call the login route, and / or load the login component
-      console.log('do login/ logout on click');
+  // add some router security here
+  router.beforeEach((to, from, next) => {
+    console.log('router guard fired');
+    // if the Vue authenticated property is set to false, then
+    // push the user back to the login screen (cuz they're not logged in)
 
-      // this is a ternary statement -> shorthand for if / else
-      // the expression evaluates to treu or false - if its true, set the value equal to
-      // the left of the colon. if its false, set the value equal to the right.
-      this.user.isLoggedIn = (this.user.isLoggedIn) ? false : true;
-    },
-
-    showMovieDetails({name, vidsource, description}){
-
-      console.log('show these details: ');
-      this.videotitle = name;
-      this.vidsource = vidsource;
-      this.videodescription = description;
-
-
-      // make the movie details show up
-      this.showDetails = true;
+    if (vm.authenticated == false) {
+      next("/login");
+    } else {
+      next();
     }
-  }
-
-  
-});
+  })
+})();
