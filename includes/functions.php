@@ -1,22 +1,22 @@
 <?php
+    require('connect.php');
 
-require('connect.php');
+    function getUser($conn) {
+        // validate that the post method is working from our JS file
 
-function getUsers($conn) {
-    $getData = 'SELECT * FROM users';
-    $runQuery = $conn->query($getData);
+        $username = $_POST["username"];
 
+        // echo $username;
 
-    $result = array();
+        $getUser = 'SELECT * FROM users where uname="'.$username.'"';
+        $runQuery = $conn->query($getUser);
 
+        $result = array();
 
-    while ($row = $runQuery->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $runQuery->fetch(PDO::FETCH_ASSOC)) {
+            // push each row of data into our arry to make it easy to iterate over
+            $result[] = $row;
+        }
 
-        // push each row of data into our array to make it easy to iterate over
-        $result[] = $row;
+        return $result;
     }
-
-    return $result;
-}
-
-?>
