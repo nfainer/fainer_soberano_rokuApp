@@ -9,6 +9,9 @@ export default {
                 <p>{{ liveuser.uname }}</p>
             </div>
         </div>
+
+        
+        
     </div>`,
 
     created: function() {
@@ -19,7 +22,7 @@ export default {
 
     methods: {
         navToUserHome() {
-            debugger;
+            // debugger;
 
             // send this user to its home page, and pass the user object to the home page
             this.$router.push({ name: "home", params: { currentuser: this.liveuser }})

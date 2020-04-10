@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue.js Single-File JavaScript Component Demo</title>
+  <title>Fainer_Soberano_Roku</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="css/master.css">
@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<header class="col-sm-12 fixed-top">
-				<img src="images/roku.svg" alt="Roku logo" width="90"><span>FlashBack</span>
+				<router-link to="/"><img src="images/logo.png" alt="Roku logo" width="90"></router-link>
 				<nav class="float-right">
 				<ul>
 					<!-- <li>Kids</li> -->            
@@ -33,7 +33,7 @@
 	</div> <!-- end container fluid -->
 	
 	<!-- first thing in component templates should be a container -->
-	<router-view @authenticated="setAuthenticated"/>	
+	<router-view @authenticated="setAuthenticated"/>
 
 	</main>
 
@@ -41,6 +41,14 @@
 		<p class="copy">
 			&copy; 2018 The Awesome Company, Inc
 		</p>
+
+		<ul>
+			<li><a>FAQ</a></li>
+			<li><a>Terms of service</a></li>
+			<li><a>Help</a></li>
+			<li><a>Contact Us</a></li>
+		</ul>
+	
 
 		<ul class="float-right">
 			<li><i class="fab fa-facebook"></i></li>
