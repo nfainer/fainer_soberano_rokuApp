@@ -1,41 +1,48 @@
+import VideoComponent from "./VideoComponent.js";
+import AudioComponent from "./AudioComponent.js";
+
+
 export default {
     props: ['currentuser'],
 
     template: `
-    <div class="container">
-        <pre>{{ currentuser }}</pre>
-        <h1>Hello, {{ currentuser.uname }}</h1>
+        <div class="container">
+            <component :is="this.activeComponent"></component>
 
-        <div class="media-carousel">
-
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/arrival.jpg" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block w-100" src="images/arrival.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block w-100" src="images/arrival.jpg" alt="Third slide">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                </div>
-
+            <!-- show media icons here -->
+            <div class="row"> <!-- 2-up for nav and media info -->
+                <nav class="col-12 col-sm-3 side-nav">
+                    <ul class="media-type">
+                        <li v-for="media in mediaTypes" :data-type="media.description" @click="switchMedia(media.component)">
+                            <span>
+                                <i v-bind:class="[media.iconClass]"></i>
+                            </span>
+                            
+                            <span class="d-none d-md-block">{{ media.description }}</span>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-    </div>
-    `
+        </div>
+    `,
+
+    data: function() {
+        return {
+
+            activeComponent: VideoComponent,
+
+            mediaTypes: [
+                {iconClass: "fas fa-film", description:  "Movies", component: VideoComponent},
+                {iconClass: "fas fa-tv", description:  "Television", component: VideoComponent},
+                {iconClass: "fas fa-headphones", description:  "Music", component: AudioComponent}
+                
+            ]
+        }
+    },
+
+    methods: {
+        switchMedia(theComponent) {
+            this.activeComponent = theComponent;
+        }
+    }
 }
