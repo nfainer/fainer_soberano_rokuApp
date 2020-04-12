@@ -7,7 +7,7 @@ function getAll($tbl)
     $results = $pdo->query($queryAll);
 
     if ($results) {
-        return $results;
+        return $results->fetchAll(PDO::FETCH_ASSOC);
     } else {
         return 'There was a problem accessing this info';
     }
@@ -42,8 +42,8 @@ function getMoviesByFilter($args)
 
     $results = $pdo->query($filterQuery);
 
-    echo $filterQuery;
-    exit;
+    // echo $filterQuery;
+    // exit;
 
     if ($results) {
         return $results;

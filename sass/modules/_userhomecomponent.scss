@@ -92,10 +92,38 @@
 
 }
 
-audio {
-    width: 70%;
-    margin: 0 13%;
-    position: absolute;
-    bottom: 12%;
-    opacity: 0.8;
+// audio {
+//     width: 70%;
+//     margin: 0 13%;
+//     position: absolute;
+//     bottom: 12%;
+//     opacity: 0.8;
+// }
+
+.media-container{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movies-selection{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-navigation{
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    padding: 20px;
+
 }
