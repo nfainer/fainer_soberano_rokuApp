@@ -1,4 +1,12 @@
 .roku-jumbotron {
-    color: #333;
+    color: #fff;
+    background-color: #030303;
+    border-radius: 0;
     margin: 70px 30px 0 !important;
+
+    button {
+        background-color: #8ccef1;
+        border: none;
+        color: black;
+    }
 }

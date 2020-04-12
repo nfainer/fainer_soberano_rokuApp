@@ -9,6 +9,20 @@
     border: solid white 10px;
     border-radius: 0 !important;
     margin-bottom: 1em;
+}
 
-    .card-body p { margin: 10px 0 0; }
+.card-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    width: 100%;
+    /* text-align: center; */
+    height: 250px;
+    font-size: 40px;
+}
+
+.audio-selection{
+    margin-top: 50px;
 }

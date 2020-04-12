@@ -35,6 +35,14 @@ import landingpage from './components/landingpage.js';
         // push user back to login page
         this.$router.push({ path: "/login" });
         this.authenticated = false;
+
+        if (localStorage.getItem("cachedUser")) {
+          localStorage.removeItem("cachedUser");
+        }
+
+        if (localStorage.getItem("cachedVideo")) {
+          localStorage.removeItem("cachedVideo")
+        }
       }
     },
 
